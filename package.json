@@ -4,15 +4,23 @@
   "main": "src/index.ts",
   "license": "",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "parcel": "parcel index.html",
+    "parcel-watch": "parcel watch index.html"
   },
   "devDependencies": {
+    "@types/es6-promise": "^3.3.0",
     "@types/gl-matrix": "^2.4.0",
     "@types/node": "^9.6.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-runtime": "^6.26.0",
     "clang-format": "^1.0.41-c",
     "gl-matrix": "^2.4.0",
     "ts-node": "^5.0.1",
     "tslint": "^5.9.1",
     "typescript": "^2.8.1"
+  },
+  "dependencies": {
+    "parcel-bundler": "^1.7.0"
   }
 }

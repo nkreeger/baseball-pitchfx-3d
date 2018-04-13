@@ -40,14 +40,9 @@ export class Matchup {
     this.animate = true;
   }
 
-  async load(): Promise<void> {
-    // TODO(kreeger): Fix this.
-    const ballImage = new HTMLImageElement();
-    ballImage.onload = () => {
-      this.ballImage = ballImage;
-      // TODO - promise return here...
-    };
-    ballImage.src = '/images/baseball2.png';
+  load() {
+    const image = document.getElementById('baseball-image') as HTMLImageElement;
+    this.ballImage = image;
   }
 
   // tslint:disable-next-line:no-any
@@ -127,14 +122,12 @@ export class Matchup {
     const gl = this.gl;
     this.gl.clearColor(0.25, 0.25, 0.25, 1.0);
 
-    // TODO(kreeger): Fix this.
-    // gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
+    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    // TODO(kreeger): Fix this.
-    // mat4.perspective(
-    //     this.pMatrix, degToRad(45), gl.viewportWidth / gl.viewportHeight,
-    //     0.1, 500.0);
+    mat4.perspective(
+        this.pMatrix, degToRad(45),
+        gl.drawingBufferWidth / gl.drawingBufferHeight, 0.1, 500.0);
     mat4.multiply(this.pMatrix, this.pMatrix, this.cMatrix);
 
     this.field.draw(gl, this.pMatrix);
