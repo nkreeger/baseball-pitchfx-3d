@@ -295,7 +295,6 @@ const INDEX_DATA = [] as number[];
 const NORMAL_DATA_SIZE = 3;
 const TEXTURE_COORD_DATA_SIZE = 2;
 const VERTEX_POSITION_DATA_SIZE = 3;
-const INDEX_DATA_SIZE = 1;
 
 for (let latNum = 0; latNum <= LATITUDE_BANDS; latNum++) {
   const theta = latNum * Math.PI / LATITUDE_BANDS;

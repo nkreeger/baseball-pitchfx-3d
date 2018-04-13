@@ -143,7 +143,6 @@ const FIELD_COLORS = [
   0.0, 0.2, 0.0, 1.0, 0.0, 0.5, 0.0, 1.0, 0.0, 0.2, 0.0, 1.0, 0.0, 0.2, 0.0, 1.0
 ];
 const FIELD_COLORS_SIZE = 4;
-const FIELD_COLORS_ITEMS = 4;
 
 const INFIELD_VERTICES =
     [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0];
@@ -154,7 +153,6 @@ const INFIELD_COLORS = [
   0.0, 0.5, 0.0, 1.0, 0.0, 0.7, 0.0, 1.0, 0.0, 0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 1.0
 ];
 const INFIELD_COLORS_SIZE = 4;
-const INFIELD_COLORS_ITEMS = 4;
 
 // 27.432m == 90ft.
 const INFIELD_SCALE_SIZE = 27.432;
