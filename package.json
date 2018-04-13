@@ -1,0 +1,15 @@
+{
+  "name": "mlb-pitch-3d",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "license": "",
+  "scripts": {
+  },
+  "devDependencies": {
+    "@types/node": "^9.6.1",
+    "clang-format": "^1.0.41-c",
+    "ts-node": "^5.0.1",
+    "tslint": "^5.9.1",
+    "typescript": "^2.8.1"
+  }
+}
