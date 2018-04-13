@@ -109,3 +109,11 @@ export function createShaderFromScript(
 
   return createShader(gl, shaderType, shaderSource);
 }
+
+export function feetToMeters(feet: number): number {
+  return feet * 0.3048;
+}
+
+export function convertFeetVal(strVal: string): number {
+  return parseFloat(strVal) * 0.3048;
+}
