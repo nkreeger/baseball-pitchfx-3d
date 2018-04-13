@@ -1,9 +1,11 @@
 {
-  "name": "mlb-pitch-3d",
+  "name": "baseball-pitch-3d",
   "version": "0.0.1",
   "main": "src/index.ts",
   "license": "",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "@types/gl-matrix": "^2.4.0",
     "@types/node": "^9.6.1",
