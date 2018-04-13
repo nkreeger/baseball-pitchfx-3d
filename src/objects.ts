@@ -1,4 +1,4 @@
-class Polygon {
+export class Polygon {
   vertices: number[];
   colors: number[];
   vertexPositionBuffer: WebGLBuffer;
@@ -42,7 +42,7 @@ class Polygon {
   getColorCount() { return this.colors.length / this.getColorSize(); }
 }
 
-class Diamond extends Polygon {
+export class Diamond extends Polygon {
   constructor(gl: WebGLRenderingContext) {
     super(gl);
 
@@ -53,7 +53,7 @@ class Diamond extends Polygon {
   }
 }
 
-class Infield extends Diamond {
+export class Infield extends Diamond {
   constructor(gl: WebGLRenderingContext) {
     super(gl);
 
@@ -68,7 +68,7 @@ class Infield extends Diamond {
   getHeight() { return 27.5; }
 }
 
-class Outfield extends Polygon {
+export class Outfield extends Polygon {
   constructor(gl: WebGLRenderingContext) {
     super(gl);
 
@@ -93,7 +93,7 @@ class Outfield extends Polygon {
   getHeight() { return 121.92; }
 }
 
-class Base extends Diamond {
+export class Base extends Diamond {
   constructor(gl: WebGLRenderingContext) {
     super(gl);
 
@@ -108,7 +108,7 @@ class Base extends Diamond {
   getHeight() { return 0.38; }
 }
 
-class HomePlate extends Polygon {
+export class HomePlate extends Polygon {
   constructor(gl: WebGLRenderingContext) {
     super(gl);
 
@@ -134,7 +134,7 @@ class HomePlate extends Polygon {
   getScaleSize() { return 1.0; }
 }
 
-class PitchingRubber extends Polygon {
+export class PitchingRubber extends Polygon {
   constructor(gl: WebGLRenderingContext) {
     super(gl);
 
@@ -159,7 +159,7 @@ class PitchingRubber extends Polygon {
   getScaleSize() { return 1.0; }
 }
 
-class StrikeZone extends Polygon {
+export class StrikeZone extends Polygon {
   constructor(gl: WebGLRenderingContext, bottom: number, top: number) {
     super(gl);
 
@@ -185,7 +185,7 @@ class StrikeZone extends Polygon {
   getScaleSize() { return 1.0; }
 }
 
-class Baseball {
+export class Baseball {
   indexDataSize: number;
   vertexPositionBuffer: WebGLBuffer;
   vertexNormalBuffer: WebGLBuffer;

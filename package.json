@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "main": "src/index.ts",
   "license": "",
-  "scripts": {
-  },
+  "scripts": {},
   "devDependencies": {
+    "@types/gl-matrix": "^2.4.0",
     "@types/node": "^9.6.1",
     "clang-format": "^1.0.41-c",
+    "gl-matrix": "^2.4.0",
     "ts-node": "^5.0.1",
     "tslint": "^5.9.1",
     "typescript": "^2.8.1"
