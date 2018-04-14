@@ -5,6 +5,7 @@
   "license": "",
   "scripts": {
     "build": "tsc",
+    "build-watch": "tsc --watch",
     "parcel": "parcel index.html",
     "parcel-watch": "parcel watch index.html"
   },
