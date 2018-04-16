@@ -1,28 +1,33 @@
 // tslint:disable-next-line:max-line-length
-import {SAMPLE_CB, SAMPLE_CH, SAMPLE_FC, SAMPLE_FF, SAMPLE_FS, SAMPLE_FT, SAMPLE_SL} from './test-data';
-import {Matchup} from './webgl-matchup';
+import * as socketioClient from 'socket.io-client';
 
-function test() {
-  const matchup = new Matchup();
+// tslint:disable-next-line:max-line-length
+// import {Matchup} from './webgl-matchup';
 
-  matchup.load();
-  const pitches = [
-    SAMPLE_FT, SAMPLE_FF, SAMPLE_FS, SAMPLE_FC, SAMPLE_SL, SAMPLE_CH, SAMPLE_CB
-  ];
-  const data = {pitch: pitches};
+// function test() {
+//   const matchup = new Matchup();
 
-  document.getElementById('restart-button').onclick =
-      () => { matchup.restart(); };
-  document.getElementById('catcher-button').onclick =
-      () => { matchup.displayCatcher(); };
-  document.getElementById('pitcher-button').onclick =
-      () => { matchup.displayPitcher(); };
-  document.getElementById('overhead-button').onclick =
-      () => { matchup.displayBirdsEye(); };
+//   matchup.load();
+//   const data = {pitch: pitches};
 
-  matchup.setData(data);
-  matchup.displayCatcher();
-  matchup.tick();
+//   document.getElementById('restart-button').onclick =
+//       () => { matchup.restart(); };
+//   document.getElementById('catcher-button').onclick =
+//       () => { matchup.displayCatcher(); };
+//   document.getElementById('pitcher-button').onclick =
+//       () => { matchup.displayPitcher(); };
+//   document.getElementById('overhead-button').onclick =
+//       () => { matchup.displayBirdsEye(); };
+
+//   matchup.setData(data);
+//   matchup.displayCatcher();
+//   matchup.tick();
+// }
+
+function connect() {
+  const socket = socketioClient('http://localhost:8001');
+  socket.on('message', (data: string) => { console.log(data); });
 }
 
-test();
+// test();
+connect();
