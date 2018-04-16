@@ -1,5 +1,5 @@
 import {mat4} from 'gl-matrix';
-import {createShaderProgram} from './webgl-core';
+import {createShaderProgram} from './core';
 
 export class StrikeZone {
   mvMatrix: mat4;

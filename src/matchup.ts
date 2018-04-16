@@ -1,8 +1,8 @@
 import {mat4, vec3} from 'gl-matrix';
 
-import {create, degToRad} from './webgl-core';
-import {Field} from './webgl-field';
-import {Pitch, PitchObj} from './webgl-pitch';
+import {create, degToRad} from './core';
+import {Field} from './field';
+import {Pitch, PitchObj} from './pitch';
 
 export class Matchup {
   gl: WebGLRenderingContext;
@@ -10,7 +10,6 @@ export class Matchup {
   pMatrix: mat4;
   cMatrix: mat4;
 
-  // TODO(kreeger): fix me.
   ballImage: HTMLImageElement;
 
   field: Field;
@@ -22,9 +21,7 @@ export class Matchup {
   pitchIndex: number;
   animate: boolean;
 
-  testRad: number;
-
-  constructor() {
+  constructor(baseballImageId: string) {
     this.gl = create('webgl-canvas') as WebGLRenderingContext;
 
     this.pMatrix = mat4.create();
@@ -38,10 +35,9 @@ export class Matchup {
     this.pitchIndex = -1;
 
     this.animate = true;
-  }
 
-  load() {
-    const image = document.getElementById('baseball-image') as HTMLImageElement;
+    // Mild hack - make sure that baseball image is rendered in page somewhere.
+    const image = document.getElementById(baseballImageId) as HTMLImageElement;
     this.ballImage = image;
   }
 
@@ -81,7 +77,6 @@ export class Matchup {
     mat4.translate(this.cMatrix, this.cMatrix, [0.0, -1.0, -21.0]);
 
     const axis = vec3.fromValues(0, 1, 1);
-    this.testRad = 0.5;
     const radians = degToRad(180);
     mat4.rotate(this.cMatrix, this.cMatrix, radians, axis);
   }
@@ -97,7 +92,9 @@ export class Matchup {
   }
 
   tick() {
-    window.requestAnimationFrame(() => { this.tick(); });
+    window.requestAnimationFrame(() => {
+      this.tick();
+    });
 
     if (this.animate) {
       if (this.pitchIndex < this.pitches.length) {

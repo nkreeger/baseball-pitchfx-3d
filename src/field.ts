@@ -1,9 +1,9 @@
 import {mat4} from 'gl-matrix';
 
+import {createShaderProgram} from './core';
 // tslint:disable-next-line:max-line-length
-import {createShaderProgramFromScripts} from './webgl-core';
-// tslint:disable-next-line:max-line-length
-import {Base, HomePlate, Infield, Outfield, PitchingRubber, Polygon} from './webgl-objects';
+import {Base, HomePlate, Infield, Outfield, PitchingRubber, Polygon} from './objects';
+import {FRAGMENT_SHADER_2D, VERTEX_SHADER_2D} from './shaders';
 
 export class Field {
   shaderProgram: WebGLShader;
@@ -23,17 +23,18 @@ export class Field {
   pitchingRubber: PitchingRubber;
 
   constructor(gl: WebGLRenderingContext) {
-    const shaderProgram = createShaderProgramFromScripts(
-        gl, ['2d-vertex-shader', '2d-fragment-shader']);
-    this.shaderProgram = shaderProgram;
+    this.shaderProgram =
+        createShaderProgram(gl, VERTEX_SHADER_2D, FRAGMENT_SHADER_2D);
 
     this.vertexPositionAttr =
-        gl.getAttribLocation(shaderProgram, 'aVertexPosition');
-    this.vertexColorAttr = gl.getAttribLocation(shaderProgram, 'aVertexColor');
+        gl.getAttribLocation(this.shaderProgram, 'aVertexPosition');
+    this.vertexColorAttr =
+        gl.getAttribLocation(this.shaderProgram, 'aVertexColor');
 
-    this.mvMatrixUniform = gl.getUniformLocation(shaderProgram, 'uMVMatrix');
-    this.pMatrixUniform = gl.getUniformLocation(shaderProgram, 'uPMatrix');
-    this.scaleUniform = gl.getUniformLocation(shaderProgram, 'uScale');
+    this.mvMatrixUniform =
+        gl.getUniformLocation(this.shaderProgram, 'uMVMatrix');
+    this.pMatrixUniform = gl.getUniformLocation(this.shaderProgram, 'uPMatrix');
+    this.scaleUniform = gl.getUniformLocation(this.shaderProgram, 'uScale');
 
     this.outfield = new Outfield(gl);
     this.infield = new Infield(gl);

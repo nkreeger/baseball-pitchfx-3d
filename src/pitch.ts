@@ -1,11 +1,14 @@
 import {mat3, mat4, vec3} from 'gl-matrix';
 
+import {convertFeetVal, createShaderProgram, degToRad} from './core';
+import {Baseball, StrikeZone} from './objects';
 // tslint:disable-next-line:max-line-length
-import {convertFeetVal, createShaderProgramFromScripts, degToRad} from './webgl-core';
-import {Baseball, StrikeZone} from './webgl-objects';
+import {FRAGMENT_LIGHTING_TEXTURE_SHADER_3D, VERTEX_LIGHTING_SHADER_3D} from './shaders';
 
 // TODO(kreeger): define this somewhere else.
-export class PitchObj { [key: string]: string }
+export class PitchObj {
+  [key: string]: string
+}
 
 export class Pitch {
   ballTexture: WebGLTexture;
@@ -61,31 +64,31 @@ export class Pitch {
 
   constructor(
       gl: WebGLRenderingContext, pitch: PitchObj, texture: HTMLImageElement) {
-    const shaderProgram = createShaderProgramFromScripts(
-        gl,
-        ['3d-vertex-lighting-shader', '3d-fragment-lighting-texture-shader']);
-    this.shaderProgram = shaderProgram;
+    this.shaderProgram = createShaderProgram(
+        gl, VERTEX_LIGHTING_SHADER_3D, FRAGMENT_LIGHTING_TEXTURE_SHADER_3D);
 
     this.vertexPositionAttr =
-        gl.getAttribLocation(shaderProgram, 'aVertexPosition');
+        gl.getAttribLocation(this.shaderProgram, 'aVertexPosition');
     this.vertexNormalAttr =
-        gl.getAttribLocation(shaderProgram, 'aVertexNormal');
+        gl.getAttribLocation(this.shaderProgram, 'aVertexNormal');
     this.textureCoordAttr =
-        gl.getAttribLocation(shaderProgram, 'aTextureCoord');
-    this.vertexColorAttr = gl.getAttribLocation(shaderProgram, 'aVertexColor');
+        gl.getAttribLocation(this.shaderProgram, 'aTextureCoord');
+    this.vertexColorAttr =
+        gl.getAttribLocation(this.shaderProgram, 'aVertexColor');
 
-    this.pMatrixUniform = gl.getUniformLocation(shaderProgram, 'uPMatrix');
-    this.mvMatrixUniform = gl.getUniformLocation(shaderProgram, 'uMVMatrix');
-    this.nMatrixUniform = gl.getUniformLocation(shaderProgram, 'uNMatrix');
-    this.samplerUniform = gl.getUniformLocation(shaderProgram, 'uSampler');
+    this.pMatrixUniform = gl.getUniformLocation(this.shaderProgram, 'uPMatrix');
+    this.mvMatrixUniform =
+        gl.getUniformLocation(this.shaderProgram, 'uMVMatrix');
+    this.nMatrixUniform = gl.getUniformLocation(this.shaderProgram, 'uNMatrix');
+    this.samplerUniform = gl.getUniformLocation(this.shaderProgram, 'uSampler');
     this.ambientColorUniform =
-        gl.getUniformLocation(shaderProgram, 'uAmbientColor');
+        gl.getUniformLocation(this.shaderProgram, 'uAmbientColor');
     this.lightingDirectionUniform =
-        gl.getUniformLocation(shaderProgram, 'uLightingDirection');
+        gl.getUniformLocation(this.shaderProgram, 'uLightingDirection');
     this.directionalColorUniform =
-        gl.getUniformLocation(shaderProgram, 'uDirectionalColor');
+        gl.getUniformLocation(this.shaderProgram, 'uDirectionalColor');
     this.colorOptionUniform =
-        gl.getUniformLocation(shaderProgram, 'uColorOption');
+        gl.getUniformLocation(this.shaderProgram, 'uColorOption');
 
     this.ballTexture = gl.createTexture();
 

@@ -1,4 +1,6 @@
 *.csv
+*_pitches.json
+*.gz
 build/
 dist/
 deps/tensorflow/include/*
