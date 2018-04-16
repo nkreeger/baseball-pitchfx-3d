@@ -21,20 +21,23 @@ export class Matchup {
   pitchIndex: number;
   animate: boolean;
 
-  constructor(canvasId: string, baseballImageId: string) {
-    this.gl = create(canvasId) as WebGLRenderingContext;
-
+  constructor() {
     this.pMatrix = mat4.create();
     this.cMatrix = mat4.create();
+
+    this.pitches = [];
+    this.pitchIndex = -1;
+
+    this.animate = true;
+  }
+
+  initialize(canvasId: string, baseballImageId: string) {
+    this.gl = create(canvasId) as WebGLRenderingContext;
 
     // Catchers perspective to start with.
     this.displayCatcher();
 
     this.field = new Field(this.gl);
-    this.pitches = [];
-    this.pitchIndex = -1;
-
-    this.animate = true;
 
     // Mild hack - make sure that baseball image is rendered in page somewhere.
     const image = document.getElementById(baseballImageId) as HTMLImageElement;
