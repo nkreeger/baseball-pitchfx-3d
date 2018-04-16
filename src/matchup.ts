@@ -21,8 +21,8 @@ export class Matchup {
   pitchIndex: number;
   animate: boolean;
 
-  constructor(baseballImageId: string) {
-    this.gl = create('webgl-canvas') as WebGLRenderingContext;
+  constructor(canvasId: string, baseballImageId: string) {
+    this.gl = create(canvasId) as WebGLRenderingContext;
 
     this.pMatrix = mat4.create();
     this.cMatrix = mat4.create();
