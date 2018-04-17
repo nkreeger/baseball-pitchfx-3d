@@ -74,9 +74,9 @@ export class Matchup {
 
   displayCatcher() {
     mat4.identity(this.cMatrix);
-    mat4.translate(this.cMatrix, this.cMatrix, [0.0, -0.85, -2.1]);
+    mat4.translate(this.cMatrix, this.cMatrix, [0.0, -0.6, -1.5]);
     const axis = vec3.fromValues(1, 0, 0);
-    const radians = degToRad(-90);
+    const radians = degToRad(-82);
     mat4.rotate(this.cMatrix, this.cMatrix, radians, axis);
   }
 
