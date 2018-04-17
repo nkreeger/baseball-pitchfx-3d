@@ -21,6 +21,8 @@ export class Matchup {
   pitchIndex: number;
   animate: boolean;
 
+  loop: boolean;
+
   constructor() {
     this.pMatrix = mat4.create();
     this.cMatrix = mat4.create();
@@ -29,9 +31,10 @@ export class Matchup {
     this.pitchIndex = -1;
 
     this.animate = true;
+    this.loop = true;
   }
 
-  initialize(canvasId: string, baseballImageId: string) {
+  initialize(canvasId: string, baseballImageId: string, loop = true) {
     this.gl = create(canvasId) as WebGLRenderingContext;
 
     // Catchers perspective to start with.
@@ -42,6 +45,8 @@ export class Matchup {
     // Mild hack - make sure that baseball image is rendered in page somewhere.
     const image = document.getElementById(baseballImageId) as HTMLImageElement;
     this.ballImage = image;
+
+    this.loop = loop;
   }
 
   // tslint:disable-next-line:no-any
@@ -62,7 +67,7 @@ export class Matchup {
     this.animate = false;
     this.pitchIndex = 0;
     for (let i = 0; i < this.pitches.length; i++) {
-      this.pitches[i].restart();
+      this.pitches[i].restart(this.pitches.length === 1);
     }
     this.animate = true;
   }
@@ -110,6 +115,8 @@ export class Matchup {
           this.pitchIndex++;
           if (this.pitchIndex < this.pitches.length) {
             this.pitches[this.pitchIndex].showStrikeZone = true;
+          } else if (this.pitchIndex === this.pitches.length && this.loop) {
+            this.restart();
           }
         }
       }

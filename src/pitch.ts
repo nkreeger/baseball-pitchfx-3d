@@ -152,14 +152,14 @@ export class Pitch {
     gl.bindTexture(gl.TEXTURE_2D, null);
   }
 
-  restart() {
+  restart(showStrikeZone: boolean) {
     this.ballX = this.x0;
     this.ballY = this.y0;
     this.ballZ = this.z0;
 
     this.isDone = false;
     this.pathDone = false;
-    this.showStrikeZone = false;
+    this.showStrikeZone = showStrikeZone;
 
     this.elapsedTime = 0;
     this.lastTime = 0;
