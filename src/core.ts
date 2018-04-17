@@ -7,7 +7,7 @@ export function create(elementId: string) {
 
   const rect = (element.parentNode as HTMLElement).getBoundingClientRect();
   element.width = rect.width;
-  element.height = rect.width * 0.75;
+  element.height = rect.width * 0.50;
 
   return create3DContext(element);
 }
