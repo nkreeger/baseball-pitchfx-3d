@@ -222,16 +222,17 @@ export class Pitch {
     gl.uniform3f(this.directionalColorUniform, 0.8, 0.8, 0.8);
 
     if (this.pathDone) {
-      const color = 0.5;
-      if (this.pitch.type === 'B') {
-        gl.uniform3f(this.ambientColorUniform, 0.0, 0.0, color);
-      } else if (this.pitch.type === 'S') {
-        gl.uniform3f(this.ambientColorUniform, color, 0.0, 0.0);
-      } else if (this.pitch.type === 'X') {
-        gl.uniform3f(this.ambientColorUniform, 0.0, color, 0.0);
-      } else {
-        console.log('this.pitch.type is not handled: ', this.pitch.type);
-      }
+      // TODO - set this elsewhere.
+      //   const color = 0.5;
+      //   if (this.pitch.type === 'B') {
+      //     gl.uniform3f(this.ambientColorUniform, 0.0, 0.0, color);
+      //   } else if (this.pitch.type === 'S') {
+      //     gl.uniform3f(this.ambientColorUniform, color, 0.0, 0.0);
+      //   } else if (this.pitch.type === 'X') {
+      //     gl.uniform3f(this.ambientColorUniform, 0.0, color, 0.0);
+      //   } else {
+      //     console.log('this.pitch.type is not handled: ', this.pitch.type);
+      //   }
     } else {
       gl.uniform3f(this.ambientColorUniform, 0.2, 0.2, 0.2);
     }

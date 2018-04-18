@@ -72,11 +72,11 @@ export class Matchup {
     this.animate = true;
   }
 
-  displayCatcher() {
+  displayCatcher(height = -0.6, yAxis = -1.5, camRotate = -82) {
     mat4.identity(this.cMatrix);
-    mat4.translate(this.cMatrix, this.cMatrix, [0.0, -0.6, -1.5]);
+    mat4.translate(this.cMatrix, this.cMatrix, [0.0, height, yAxis]);
     const axis = vec3.fromValues(1, 0, 0);
-    const radians = degToRad(-82);
+    const radians = degToRad(camRotate);
     mat4.rotate(this.cMatrix, this.cMatrix, radians, axis);
   }
 
@@ -99,6 +99,13 @@ export class Matchup {
     mat4.rotate(this.cMatrix, this.cMatrix, radians, axis);
   }
 
+  timeoutTick(ms: number) {
+    setTimeout(() => {
+      this.animate = true;
+    }, ms);
+    this.tick();
+  }
+
   tick() {
     window.requestAnimationFrame(() => {
       this.tick();
@@ -115,8 +122,12 @@ export class Matchup {
           this.pitchIndex++;
           if (this.pitchIndex < this.pitches.length) {
             this.pitches[this.pitchIndex].showStrikeZone = true;
-          } else if (this.pitchIndex === this.pitches.length && this.loop) {
-            this.restart();
+          } else if (this.pitchIndex === this.pitches.length) {
+            if (this.loop) {
+              this.restart();
+            } else {
+              this.pitches[this.pitchIndex - 1].showStrikeZone = true;
+            }
           }
         }
       }
