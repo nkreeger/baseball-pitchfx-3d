@@ -1,3 +1,4 @@
+import {Pitch} from 'baseball-pitchfx-types';
 import {mat3, mat4, vec3} from 'gl-matrix';
 
 import {convertFeetVal, createShaderProgram, degToRad} from './core';
@@ -5,12 +6,7 @@ import {Baseball, StrikeZone} from './objects';
 // tslint:disable-next-line:max-line-length
 import {FRAGMENT_LIGHTING_TEXTURE_SHADER_3D, VERTEX_LIGHTING_SHADER_3D} from './shaders';
 
-// TODO(kreeger): define this somewhere else.
-export class PitchObj {
-  [key: string]: string
-}
-
-export class Pitch {
+export class PitchDisplay {
   ballTexture: WebGLTexture;
 
   shaderProgram: WebGLShader;
@@ -44,7 +40,7 @@ export class Pitch {
   pitchTime: number;
   lastTime: number;
 
-  pitch: PitchObj;
+  pitch: Pitch;
 
   vx0: number;
   vy0: number;
@@ -63,7 +59,7 @@ export class Pitch {
   strikeZone: StrikeZone;
 
   constructor(
-      gl: WebGLRenderingContext, pitch: PitchObj, texture: HTMLImageElement) {
+      gl: WebGLRenderingContext, pitch: Pitch, texture: HTMLImageElement) {
     this.shaderProgram = createShaderProgram(
         gl, VERTEX_LIGHTING_SHADER_3D, FRAGMENT_LIGHTING_TEXTURE_SHADER_3D);
 
@@ -110,15 +106,15 @@ export class Pitch {
 
     this.pitch = pitch;
 
-    this.vx0 = convertFeetVal(this.pitch['vx0']);
-    this.vy0 = convertFeetVal(this.pitch['vy0']);
-    this.vz0 = convertFeetVal(this.pitch['vz0']);
-    this.ax = convertFeetVal(this.pitch['ax']);
-    this.ay = convertFeetVal(this.pitch['ay']);
-    this.az = convertFeetVal(this.pitch['az']);
-    this.x0 = convertFeetVal(this.pitch['x0']);
-    this.y0 = convertFeetVal(this.pitch['y0']);
-    this.z0 = convertFeetVal(this.pitch['z0']);
+    this.vx0 = convertFeetVal(this.pitch.vx0);
+    this.vy0 = convertFeetVal(this.pitch.vy0);
+    this.vz0 = convertFeetVal(this.pitch.vz0);
+    this.ax = convertFeetVal(this.pitch.ax);
+    this.ay = convertFeetVal(this.pitch.ay);
+    this.az = convertFeetVal(this.pitch.az);
+    this.x0 = convertFeetVal(this.pitch.x0);
+    this.y0 = convertFeetVal(this.pitch.y0);
+    this.z0 = convertFeetVal(this.pitch.z0);
 
     this.ballX = this.x0;
     this.ballY = this.y0;

@@ -1,8 +1,9 @@
+import {Pitch} from 'baseball-pitchfx-types';
 import {mat4, vec3} from 'gl-matrix';
 
 import {create, degToRad} from './core';
 import {Field} from './field';
-import {Pitch, PitchObj} from './pitch';
+import {PitchDisplay} from './pitch_display';
 
 export class Matchup {
   gl: WebGLRenderingContext;
@@ -14,9 +15,7 @@ export class Matchup {
 
   field: Field;
 
-  // tslint:disable-next-line:no-any
-  data: any;
-  pitches: Pitch[];
+  pitcheDisplays: PitchDisplay[];
 
   pitchIndex: number;
   animate: boolean;
@@ -27,7 +26,6 @@ export class Matchup {
     this.pMatrix = mat4.create();
     this.cMatrix = mat4.create();
 
-    this.pitches = [];
     this.pitchIndex = -1;
 
     this.animate = true;
@@ -49,25 +47,21 @@ export class Matchup {
     this.loop = loop;
   }
 
-  // tslint:disable-next-line:no-any
-  setData(data: any) {
-    this.data = data;
+  setPitches(pitches: Pitch[]) {
     this.pitchIndex = 0;
-    this.pitches = [];
-    if (Array.isArray(data.pitch)) {
-      data.pitch.forEach((pitch: PitchObj) => {
-        this.pitches.push(new Pitch(this.gl, pitch, this.ballImage));
-      });
-    } else {
-      this.pitches.push(new Pitch(this.gl, data.pitch, this.ballImage));
-    }
+    this.pitcheDisplays = [];
+
+    pitches.forEach((pitch) => {
+      this.pitcheDisplays.push(
+          new PitchDisplay(this.gl, pitch, this.ballImage));
+    });
   }
 
   restart() {
     this.animate = false;
     this.pitchIndex = 0;
-    for (let i = 0; i < this.pitches.length; i++) {
-      this.pitches[i].restart(this.pitches.length === 1);
+    for (let i = 0; i < this.pitcheDisplays.length; i++) {
+      this.pitcheDisplays[i].restart(this.pitcheDisplays.length === 1);
     }
     this.animate = true;
   }
@@ -112,21 +106,21 @@ export class Matchup {
     });
 
     if (this.animate) {
-      if (this.pitchIndex < this.pitches.length) {
+      if (this.pitchIndex < this.pitcheDisplays.length) {
         // Display pitch at index.
-        this.pitches[this.pitchIndex].animate();
-        this.pitches[this.pitchIndex].showStrikeZone = true;
+        this.pitcheDisplays[this.pitchIndex].animate();
+        this.pitcheDisplays[this.pitchIndex].showStrikeZone = true;
 
-        if (this.pitches[this.pitchIndex].isDone) {
-          this.pitches[this.pitchIndex].showStrikeZone = false;
+        if (this.pitcheDisplays[this.pitchIndex].isDone) {
+          this.pitcheDisplays[this.pitchIndex].showStrikeZone = false;
           this.pitchIndex++;
-          if (this.pitchIndex < this.pitches.length) {
-            this.pitches[this.pitchIndex].showStrikeZone = true;
-          } else if (this.pitchIndex === this.pitches.length) {
+          if (this.pitchIndex < this.pitcheDisplays.length) {
+            this.pitcheDisplays[this.pitchIndex].showStrikeZone = true;
+          } else if (this.pitchIndex === this.pitcheDisplays.length) {
             if (this.loop) {
               this.restart();
             } else {
-              this.pitches[this.pitchIndex - 1].showStrikeZone = true;
+              this.pitcheDisplays[this.pitchIndex - 1].showStrikeZone = true;
             }
           }
         }
@@ -149,8 +143,8 @@ export class Matchup {
     mat4.multiply(this.pMatrix, this.pMatrix, this.cMatrix);
 
     this.field.draw(gl, this.pMatrix);
-    for (let i = 0; i < this.pitches.length; i++) {
-      this.pitches[i].draw(gl, this.pMatrix);
+    for (let i = 0; i < this.pitcheDisplays.length; i++) {
+      this.pitcheDisplays[i].draw(gl, this.pMatrix);
     }
   }
 }

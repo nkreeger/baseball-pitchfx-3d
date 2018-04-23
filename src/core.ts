@@ -66,6 +66,6 @@ export function feetToMeters(feet: number): number {
   return feet * 0.3048;
 }
 
-export function convertFeetVal(strVal: string): number {
-  return parseFloat(strVal) * 0.3048;
+export function convertFeetVal(value: number): number {
+  return value * 0.3048;
 }
