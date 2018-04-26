@@ -19,8 +19,13 @@ export class Matchup {
 
   pitchIndex: number;
   animate: boolean;
+  tickStarted = false;
 
   loop: boolean;
+
+  clearRed = 0.75;
+  clearGreen = 0.75;
+  clearBlue = 0.75;
 
   constructor() {
     this.pMatrix = mat4.create();
@@ -57,13 +62,35 @@ export class Matchup {
     });
   }
 
+  setClearColor(red: number, green: number, blue: number) {
+    this.clearRed = red;
+    this.clearGreen = green;
+    this.clearBlue = blue;
+  }
+
   restart() {
+    this.restartTimeout();
+  }
+
+  restartTimeout(ms?: number) {
     this.animate = false;
     this.pitchIndex = 0;
     for (let i = 0; i < this.pitcheDisplays.length; i++) {
       this.pitcheDisplays[i].restart(this.pitcheDisplays.length === 1);
     }
-    this.animate = true;
+
+    if (ms === undefined) {
+      this.animate = true;
+    } else {
+      setTimeout(() => {
+        this.animate = true;
+      }, ms);
+    }
+
+    if (!this.tickStarted) {
+      this.tickStarted = true;
+      this.tick();
+    }
   }
 
   displayCatcher(height = -0.6, yAxis = -1.5, camRotate = -82) {
@@ -93,14 +120,7 @@ export class Matchup {
     mat4.rotate(this.cMatrix, this.cMatrix, radians, axis);
   }
 
-  timeoutTick(ms: number) {
-    setTimeout(() => {
-      this.animate = true;
-    }, ms);
-    this.tick();
-  }
-
-  tick() {
+  private tick() {
     window.requestAnimationFrame(() => {
       this.tick();
     });
@@ -133,6 +153,7 @@ export class Matchup {
   drawScene() {
     const gl = this.gl;
 
+    gl.clearColor(this.clearRed, this.clearGreen, this.clearBlue, 1.0);
     gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
