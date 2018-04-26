@@ -22,7 +22,9 @@ export class Field {
   base: Base;
   pitchingRubber: PitchingRubber;
 
-  constructor(gl: WebGLRenderingContext) {
+  drawOutfield: boolean;
+
+  constructor(gl: WebGLRenderingContext, drawOutfield = false) {
     this.shaderProgram =
         createShaderProgram(gl, VERTEX_SHADER_2D, FRAGMENT_SHADER_2D);
 
@@ -43,6 +45,11 @@ export class Field {
     this.pitchingRubber = new PitchingRubber(gl);
 
     this.mvMatrix = mat4.create();
+    this.drawOutfield = drawOutfield;
+  }
+
+  setDrawOutfield(drawOutfield: boolean): void {
+    this.drawOutfield = drawOutfield;
   }
 
   draw(gl: WebGLRenderingContext, pMatrix: mat4) {
@@ -54,11 +61,13 @@ export class Field {
     let x, y, z;
 
     // Outfield
-    x = 0.0;
-    y = this.outfield.getScaleSize() / 2;
-    z = 0.0;
-    this.setModelViewMatrix(x, y, z);
-    this.drawPolygon(gl, this.outfield, pMatrix);
+    if (this.drawOutfield) {
+      x = 0.0;
+      y = this.outfield.getScaleSize() / 2;
+      z = 0.0;
+      this.setModelViewMatrix(x, y, z);
+      this.drawPolygon(gl, this.outfield, pMatrix);
+    }
 
     // Infield
     x = 0.0;

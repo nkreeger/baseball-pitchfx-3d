@@ -29,17 +29,29 @@ export class Polygon {
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexColorBuffer);
   }
 
-  getScaleSize() { return Math.sin(45 / 180 * Math.PI) * this.getHeight(); }
+  getScaleSize() {
+    return Math.sin(45 / 180 * Math.PI) * this.getHeight();
+  }
 
-  getVerticesSize() { return 3; }
+  getVerticesSize() {
+    return 3;
+  }
 
-  getColorSize() { return 4; }
+  getColorSize() {
+    return 4;
+  }
 
-  getHeight() { return 0; }
+  getHeight() {
+    return 0;
+  }
 
-  getVerticesCount() { return this.vertices.length / this.getVerticesSize(); }
+  getVerticesCount() {
+    return this.vertices.length / this.getVerticesSize();
+  }
 
-  getColorCount() { return this.colors.length / this.getColorSize(); }
+  getColorCount() {
+    return this.colors.length / this.getColorSize();
+  }
 }
 
 export class Diamond extends Polygon {
@@ -58,14 +70,16 @@ export class Infield extends Diamond {
     super(gl);
 
     this.colors = [
-      0.0, 0.5, 0.0, 1.0, 0.0, 0.7, 0.0, 1.0, 0.0, 0.5, 0.0, 1.0,
-      0.0, 0.5, 0.0, 1.0, 0.0, 0.7, 0.0, 1.0, 0.0, 0.5, 0.0, 1.0
+      0.0, 0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 1.0,
+      0.0, 0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 1.0
     ];
 
     this.setBuffers(gl);
   }
 
-  getHeight() { return 27.5; }
+  getHeight() {
+    return 27.5;
+  }
 }
 
 export class Outfield extends Polygon {
@@ -90,7 +104,9 @@ export class Outfield extends Polygon {
     this.setBuffers(gl);
   }
 
-  getHeight() { return 121.92; }
+  getHeight() {
+    return 121.92;
+  }
 }
 
 export class Base extends Diamond {
@@ -105,7 +121,9 @@ export class Base extends Diamond {
     this.setBuffers(gl);
   }
 
-  getHeight() { return 0.38; }
+  getHeight() {
+    return 0.38;
+  }
 }
 
 export class HomePlate extends Polygon {
@@ -129,9 +147,13 @@ export class HomePlate extends Polygon {
     this.setBuffers(gl);
   }
 
-  getHeight() { return 0.432; }
+  getHeight() {
+    return 0.432;
+  }
 
-  getScaleSize() { return 1.0; }
+  getScaleSize() {
+    return 1.0;
+  }
 }
 
 export class PitchingRubber extends Polygon {
@@ -154,9 +176,13 @@ export class PitchingRubber extends Polygon {
     this.setBuffers(gl);
   }
 
-  getHeight() { return 0.152; }
+  getHeight() {
+    return 0.152;
+  }
 
-  getScaleSize() { return 1.0; }
+  getScaleSize() {
+    return 1.0;
+  }
 }
 
 export class StrikeZone extends Polygon {
@@ -182,7 +208,9 @@ export class StrikeZone extends Polygon {
     this.setBuffers(gl);
   }
 
-  getScaleSize() { return 1.0; }
+  getScaleSize() {
+    return 1.0;
+  }
 }
 
 export class Baseball {
@@ -293,11 +321,19 @@ export class Baseball {
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.vertexIndexBuffer);
   }
 
-  getVertexPositionSize() { return 3; }
+  getVertexPositionSize() {
+    return 3;
+  }
 
-  getTextureCoordDataSize() { return 2; }
+  getTextureCoordDataSize() {
+    return 2;
+  }
 
-  getNormalDataSize() { return 3; }
+  getNormalDataSize() {
+    return 3;
+  }
 
-  getIndexDataSize() { return this.indexDataSize; }
+  getIndexDataSize() {
+    return this.indexDataSize;
+  }
 }

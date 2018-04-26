@@ -23,6 +23,7 @@ export class Matchup {
 
   loop: boolean;
 
+  renderClear: boolean;
   clearRed = 0.75;
   clearGreen = 0.75;
   clearBlue = 0.75;
@@ -37,7 +38,9 @@ export class Matchup {
     this.loop = true;
   }
 
-  initialize(canvasId: string, baseballImageId: string, loop = true) {
+  initialize(
+      canvasId: string, baseballImageId: string, renderClear = false,
+      loop = true) {
     this.gl = create(canvasId) as WebGLRenderingContext;
 
     // Catchers perspective to start with.
@@ -50,6 +53,7 @@ export class Matchup {
     this.ballImage = image;
 
     this.loop = loop;
+    this.renderClear = renderClear;
   }
 
   setPitches(pitches: Pitch[]) {
@@ -91,6 +95,10 @@ export class Matchup {
       this.tickStarted = true;
       this.tick();
     }
+  }
+
+  setDrawOutfield(draw: boolean) {
+    this.field.setDrawOutfield(draw);
   }
 
   displayCatcher(height = -0.6, yAxis = -1.5, camRotate = -82) {
@@ -153,7 +161,9 @@ export class Matchup {
   drawScene() {
     const gl = this.gl;
 
-    gl.clearColor(this.clearRed, this.clearGreen, this.clearBlue, 1.0);
+    if (this.renderClear) {
+      gl.clearColor(this.clearRed, this.clearGreen, this.clearBlue, 1.0);
+    }
     gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
