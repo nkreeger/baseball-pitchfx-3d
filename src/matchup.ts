@@ -132,7 +132,6 @@ export class Matchup {
 
   drawScene() {
     const gl = this.gl;
-    this.gl.clearColor(0.25, 0.25, 0.25, 1.0);
 
     gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
