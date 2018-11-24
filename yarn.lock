@@ -56,9 +56,10 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
 
-baseball-pitchfx-types@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/baseball-pitchfx-types/-/baseball-pitchfx-types-0.0.1.tgz#127ff1190ee62cc776fa1f04b118c93bc31aece5"
+baseball-pitchfx-types@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/baseball-pitchfx-types/-/baseball-pitchfx-types-0.0.4.tgz#415b4623921857fc0aa8f6c1958ae1c93f567a4e"
+  integrity sha512-aDM8A0yqyomv8px2QAdAR7diLuTRvQ7bYB3S2TawyBtG+H6MJkWJIdZC2E19fh3NKYKWXhDM9b7DjRVSLA0qIQ==
 
 brace-expansion@^1.1.7:
   version "1.1.11"

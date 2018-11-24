@@ -24,14 +24,14 @@ export const VERTEX_SHADER_2D = `
 
 export const FRAGMENT_LIGHTING_TEXTURE_SHADER_3D = `
     precision mediump float;
-    
+
     varying float vColorOption;
     varying vec2 vTextureCoord;
     varying vec3 vLightWeighting;
     varying vec4 vColor;
-    
+
     uniform sampler2D uSampler;
-    
+
     void main(void) {
       if (vColorOption > 0.0) {
         vec4 textureColor =
@@ -47,33 +47,33 @@ export const VERTEX_LIGHTING_SHADER_3D = `
     attribute vec3 aVertexNormal;
     attribute vec2 aTextureCoord;
     attribute vec4 aVertexColor;
-  
+
     uniform mat4 uMVMatrix;
     uniform mat4 uPMatrix;
     uniform mat3 uNMatrix;
-    
+
     uniform vec3 uAmbientColor;
-    
+
     uniform vec3 uLightingDirection;
     uniform vec3 uDirectionalColor;
-    
+
     uniform float uColorOption;
-    
+
     varying float vColorOption;
     varying vec2 vTextureCoord;
     varying vec3 vLightWeighting;
     varying vec4 vColor;
-    
+
     void main(void) {
       gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
-    
+
       if (uColorOption > 0.0) {
         vTextureCoord = aTextureCoord;
       } else {
         vColor = aVertexColor;
       }
       vColorOption = uColorOption;
-    
+
       vec3 transformedNormal = uNMatrix * aVertexNormal;
       float directionalLightWeighting =
           max(dot(transformedNormal, uLightingDirection), 0.0);
