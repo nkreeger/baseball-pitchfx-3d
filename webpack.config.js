@@ -20,6 +20,6 @@ module.exports = {
     path: path.resolve(__dirname, 'demo/dist')
   },
   devServer: {
-    contentBase: path.join(__dirname, 'demo'),
+    // contentBase: path.join(__dirname, 'demo'),
   }
 };
