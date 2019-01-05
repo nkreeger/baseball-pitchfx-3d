@@ -2,6 +2,7 @@
 *_pitches.json
 *.gz
 build/
+demo/dist/
 dist/
 deps/tensorflow/include/*
 deps/tensorflow/lib/*
