@@ -19,3 +19,15 @@ matchup.setPitches(pitches);
 // // tslint:disable-next-line:no-debugger
 // debugger;
 matchup.restart();
+
+document.getElementById('restart-button').onclick = () => {
+};
+document.getElementById('pitcher-button').onclick = () => {
+  matchup.displayPitcher();
+};
+document.getElementById('catcher-button').onclick = () => {
+  matchup.displayCatcher();
+};
+document.getElementById('overhead-button').onclick = () => {
+  matchup.displayBirdsEye();
+};

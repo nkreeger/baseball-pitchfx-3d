@@ -12,7 +12,7 @@
     "@types/es6-promise": "^3.3.0",
     "@types/gl-matrix": "^2.4.0",
     "@types/node": "^9.6.1",
-    "clang-format": "^1.0.41-c",
+    "clang-format": "^1.2.4",
     "ts-loader": "^5.3.2",
     "ts-node": "^5.0.1",
     "tslint": "^5.9.1",

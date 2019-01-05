@@ -5,7 +5,7 @@
 </head>
 
 <body>
-  <canvas id="webgl-canvas" style="border: none; padding-top:10px;"></canvas>
+    <canvas id="webgl-canvas" style="border: none; padding-top:10px;"></canvas>
   <img id="baseball-image" src="baseball2.png" style="visibility: hidden;">
 
   <button id="restart-button">restart</button>
@@ -14,6 +14,16 @@
   <button id="overhead-button">overhead</button>
 
   <script src="./dist/bundle.js"></script>
+
+  <style>
+    body {
+      background-color: gray;
+    }
+
+    .canvas-wrapper {
+      min-height: 500px;
+    }
+  </style>
 </body>
 
 </html>
