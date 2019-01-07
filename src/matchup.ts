@@ -72,6 +72,10 @@ export class Matchup {
     this.clearBlue = blue;
   }
 
+  //
+  // TODO -- need another method here.
+  //
+
   restart() {
     this.restartTimeout();
   }
